@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-neon-green: #39ff14;
+  --color-neon-blue: #00f0ff;
+  --color-neon-purple: #bf5fff;
+
+  --color-dark-900: #050b14;
+  --color-dark-800: #0a1628;
+  --color-dark-700: #0f2040;
+  --color-dark-600: #152a52;
+
+  --font-sans: "Inter", "system-ui", "sans-serif";
+
+  --shadow-neon: 0 0 15px rgba(0, 240, 255, 0.4);
+  --shadow-neon-green: 0 0 15px rgba(57, 255, 20, 0.4);
+  --shadow-neon-red: 0 0 15px rgba(255, 60, 60, 0.4);
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px rgba(0, 240, 255, 0.2);
+    }
+
+    100% {
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    }
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-green-50 text-emerald-950 dark:bg-dark-900 dark:text-white font-sans transition-colors duration-300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 240, 255, 0.4);
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .dark .glass {
+    background: rgba(10, 22, 40, 0.7);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .input-field {
+    @apply w-full bg-white dark:bg-dark-800/80 border border-green-300 dark:border-white/10 rounded-xl px-4 py-3 text-emerald-900 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-neon-blue/50 focus:ring-2 focus:ring-neon-blue/20 transition-all duration-200;
+  }
+
+  .custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 240, 255, 0.3) transparent;
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #00f0ff, #39ff14);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
